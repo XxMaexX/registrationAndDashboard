@@ -3,13 +3,14 @@
  <ul>
      <h1>State Manager</h1>
      <!-- navigation links for each page -->
- <li><router-link :to=" { name: 'Dashboard' } ">Dashboard</router-link> </li>
- <li><router-link :to=" { name: 'Home' } ">Sign Up</router-link> </li>
+ <li><router-link :to=" { name: 'dashboard' } ">Dashboard</router-link> </li>
+ <li><router-link :to=" { name: 'home' } ">Sign Up</router-link> </li>
  </ul>
  </div>
 </template>
 
 <style scoped lang='css'>
+
 #navigation-view ul {
   padding: 45px;
 }
@@ -27,7 +28,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #F99A9C;
+  background-color: #719bd5;
 }
 
 li {
@@ -43,11 +44,11 @@ li a {
 }
 
 li a:hover:not(.active) {
-  background-color: #BB5769;
+  background-color: #2f3e65;
 }
 
 .active {
-  background-color: #BB5769;
+  background-color: #2f3e65;
 }
 
 </style>

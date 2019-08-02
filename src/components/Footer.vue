@@ -15,7 +15,7 @@ p {
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #F99A9C;
+  background-color: #719bd5;
   color: white;
   text-align: center;
 }

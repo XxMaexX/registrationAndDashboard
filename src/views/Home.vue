@@ -1,68 +1,97 @@
 <template>
-  <div>
-    <!-- Basic Form for users to input the following items -->
-    <el-form class="contactForm">
-      <h1>test</h1>
-      <!-- Input first name in the form-->
-      <el-form-item label="Full Name">
-        <el-input placeholder="Mia Welsh"></el-input>
-      </el-form-item>
+<div class="SignUp">
+      <h2>Sign Up!</h2>
+  <div class="basicform">
+<el-form :model="ruleForm" status-icon ref="ruleForm" class="demo-ruleForm">
+      <!-- Input full name in the form-->
+  <el-form-item label="Full Name" prop="name">
+      <el-input placeholder="Mia Welsh" v-model="ruleForm.name"></el-input>
+  </el-form-item>
       <!-- Input email in the form -->
-      <!-- <el-form-item label="Email" prop="email">
-        <el-input placeholder="mia.welsh@hotmail.com"></el-input>
-      </el-form-item> -->
+  <el-form-item label="Email" prop="email">
+      <el-input placeholder="mia.welsh@hotmail.com" v-model="ruleForm.email"></el-input>
+  </el-form-item>
       <!-- Input password in the form -->
-      <!-- <el-input placeholder="Please input password" show-password></el-input> -->
+  <el-form-item label="Password" prop="pass">
+      <el-input placeholder="Please input password" v-model="ruleForm.input" show-password></el-input>
+  </el-form-item>
       <!-- once form is completed, user's must click the submit button -->
-      <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>
-    </el-form>
+    <router-link to="/dashboard">
+    <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>    
+    </router-link>
+</el-form>
   </div>
+</div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
-      return {
-        fullName: '',
-        email: '',
-        input: ''
-      }
-    },
-  name: "contactForm",
-    // submit button
-      methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.openDialog = true;
+      var validatePass = (rules, value, callback) => {
+        if (value === '') {
+          callback(new Error('Please input the password'));
         } else {
-          return false;
+          if (this.ruleForm.checkPass !== '') {
+            this.$refs.ruleForm.validateField('checkPass');
+          }
+          callback();
         }
-      });
+      };
+      return {
+        ruleForm: {
+          name: '',
+          email: '',
+          pass: ''
+        }
+      };
     },
-    // resets after submitting
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    methods: {
+      ...mapActions(["updateUsers"]),
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        }),
+        this.updateUsers({
+          Name: this.ruleForm.name,
+          Email: this.ruleForm.email,
+          Password: this.ruleForm.pass
+        });
+      }
     }
   }
-};
 </script>
 
 <style>
 
-/* style for pop up alert message */
-
-.container {
-  margin: auto 50px;
+.SignUp {
+  max-width:400px;
+	width:100%;
+	margin: 20px auto;
+	position:relative;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  padding-bottom: 40px;
 }
 
-/* .dialog-container {
+h2 {
   display: flex;
-  margin: auto 20px;
-  text-align: left;
-  
-  ul {
-    list-style: none;
+}
+
+.el-button {
+  float: right;
+}
+.basicform {
+  padding: 20px;
+}
+  .el-button--primary {
+    float: right;
+    margin-bottom: 10px !important;
   }
-} */
 </style>
