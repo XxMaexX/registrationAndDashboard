@@ -1,4 +1,5 @@
 <template>
+<!-- start of form -->
 <div class="SignUp">
       <h2>Sign Up!</h2>
   <div class="basicform">
@@ -15,7 +16,7 @@
   <el-form-item label="Password" prop="pass">
       <el-input placeholder="Please input password" v-model="ruleForm.input" show-password></el-input>
   </el-form-item>
-      <!-- once form is completed, user's must click the submit button -->
+      <!-- once form is completed, user's must click the submit button and will bring them to the dashboard page -->
     <router-link to="/dashboard">
     <el-button type="primary" @click="submitForm('ruleForm')">Submit</el-button>    
     </router-link>
@@ -28,6 +29,7 @@
 import { mapActions } from "vuex";
 export default {
   data() {
+    // password user inputted in the form
       var validatePass = (rules, value, callback) => {
         if (value === '') {
           callback(new Error('Please input the password'));
@@ -47,6 +49,7 @@ export default {
       };
     },
     methods: {
+      // pop up when form is submitted 
       ...mapActions(["updateUsers"]),
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -57,6 +60,7 @@ export default {
             return false;
           }
         }),
+        // submitting to the dashboard with the data that was inputted in the form by the user
         this.updateUsers({
           Name: this.ruleForm.name,
           Email: this.ruleForm.email,
@@ -68,7 +72,6 @@ export default {
 </script>
 
 <style>
-
 .SignUp {
   max-width:400px;
 	width:100%;
@@ -79,11 +82,9 @@ export default {
   padding: 20px;
   padding-bottom: 40px;
 }
-
 h2 {
   display: flex;
 }
-
 .el-button {
   float: right;
 }

@@ -13,10 +13,10 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    getUserName: state => {
+    userName: state => {
       return state.users.Name;
     },
-    getUserEmail: state => {
+    userEmail: state => {
       return state.users.Email;
     }, 
   },

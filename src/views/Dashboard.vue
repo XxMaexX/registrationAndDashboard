@@ -1,6 +1,8 @@
 <template>
   <div class="dashboard">
+    <!-- title of the page -->
     <div class="title"><h1>Dashboard</h1></div>
+    <!-- dashboard box with information welcoming user and displaying message -->
      <div class="container">
        <h2 class="intro">Welcome {{ NameData }} !</h2>
        <p>Let's sign up your email now {{ EmailData }} </p>
@@ -20,15 +22,16 @@ export default {
       }
     }
   },
+    // updating the dashboard with data that was inputted in the form by the user  
   computed: {
-    ...mapGetters(["getUserName"]),
-    ...mapGetters(["getUserEmail"]),
+    ...mapGetters(["userName"]),
+    ...mapGetters(["userEmail"]),
 
     NameData () {
-    return this.getUserName
+    return this.userName
     },
     EmailData(){
-    return this.getUserEmail
+    return this.userEmail
     },
       
   }
